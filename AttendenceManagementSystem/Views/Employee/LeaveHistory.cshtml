@@ -19,6 +19,7 @@
                     <th><h5>Reason</h5></th>
                     <th><h5>Count</h5></th>
                     <th><h5>Status</h5></th>
+                    <th></th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -29,22 +30,27 @@
                             @Html.HiddenFor(model => item.EmpID)
 
 
-                            <td> @Html.DisplayFor(m => item.Listofleave[i].startDate)</td>
+                            <td> @Html.DisplayFor(m => item.Listofleave[i].StartDate)</td>
                             <td>
-                                @Html.DisplayFor(m => item.Listofleave[i].endDate)
+                                @Html.DisplayFor(m => item.Listofleave[i].EndDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(m => item.Listofleave[i].reason)
+                                @Html.DisplayFor(m => item.Listofleave[i].Reason)
                             </td>
                             <td>
-                                @Html.DisplayFor(m => item.Listofleave[i].count)
+                                @Html.DisplayFor(m => item.Listofleave[i].Count)
                             </td>
                             <td>
-                                @Html.DisplayFor(m => item.Listofleave[i].status)
+                                @Html.DisplayFor(m => item.Listofleave[i].Status)
                             </td>
+                            <td>
+                                @Html.ActionLink("Cancel", "DeleteLeave","Employee", new { leaveId = item.Listofleave[i].LeaveID })
+                                
+                            </td>
+                            
                         </tr>
                     }
-                    @Html.ActionLink("back", "Index", "Employee", new { id = item.EmpID })
+                    @Html.ActionLink("back", "Index", "Employee")
                 }
 
             </table>

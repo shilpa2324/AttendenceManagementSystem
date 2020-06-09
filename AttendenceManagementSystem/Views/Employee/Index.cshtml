@@ -12,19 +12,19 @@
         <div class="panel-body">
             <div class="form-group">
                 <div>
-                    <h3>Total leaves taken:@Html.DisplayFor(model => model.leaves_taken)</h3>
+                    <h3>Total leaves taken:@Html.DisplayFor(model => model.Leaves_taken)</h3>
                 </div>
                 <div>
                     &nbsp;
                 </div>
-                @if (Model.leaves_taken != 0)
+                @if (Model.Leaves_taken != 0)
                 {
-                    <div>@Html.ActionLink("View Leave History", "LeaveHistory", new { id = Model.EmpID })</div>
+                    <div>@Html.ActionLink("View Leave History", "LeaveHistory")</div>
                 }
-                <div>@Html.ActionLink("Apply Leave", "ApplyLeave", new { id = Model.EmpID })</div>
-                @if (Model.category == "manager")
+                <div>@Html.ActionLink("Apply Leave", "ApplyLeave")</div>
+                @if (Model.Category == "manager")
                 {
-                    <div>@Html.ActionLink("Approve Leave", "ApproveLeave", new { id = Model.EmpID })</div>
+                    <div>@Html.ActionLink("Approve Leave", "ApproveLeave")</div>
                 }
 
                 

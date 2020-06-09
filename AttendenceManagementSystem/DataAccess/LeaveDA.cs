@@ -12,7 +12,7 @@ namespace AttendenceManagementSystem.DataAccess
     public class LeaveDA
     {
         SqlConnection connection = null;
-        readonly string connString = "Data Source=NEUDESI-BP74JHF\\SQLEXPRESS;Initial Catalog=attendanceManagement; Integrated Security=SSPI;";
+        readonly string connString = "Data Source=SKOLIYOTTU01\\SQLEXPRESS;Initial Catalog=attendanceManagement; Integrated Security=SSPI;";
         public LeaveDA()
         {
             connection = new SqlConnection(connString);
@@ -34,14 +34,15 @@ namespace AttendenceManagementSystem.DataAccess
                  foreach (DataRow dr in dt.Rows)
                  {
                      Leave leave = new Leave();
-                     leave.startDate = Convert.ToDateTime(dr["startDate"]);
-                     String s = String.Format("{0:d/M/yyyy}", leave.startDate);
-                     leave.endDate = Convert.ToDateTime(dr["endDate"]);
-                     String s1 = String.Format("{0:d/M/yyyy}", leave.endDate);
-                     leave.reason = Convert.ToString(dr["reason"]);
-                     leave.status = Convert.ToString(dr["status"]);
-                     leave.count = Convert.ToInt32(dr["count"]);
-                     leaveList.Add(leave);
+                     leave.StartDate = Convert.ToDateTime(dr["StartDate"]);
+                     String s = String.Format("{0:d/M/yyyy}", leave.StartDate);
+                     leave.EndDate = Convert.ToDateTime(dr["EndDate"]);
+                     String s1 = String.Format("{0:d/M/yyyy}", leave.EndDate);
+                     leave.Reason = Convert.ToString(dr["Reason"]);
+                     leave.Status = Convert.ToString(dr["Status"]);
+                     leave.Count = Convert.ToInt32(dr["Count"]);
+                     leave.LeaveID= Convert.ToInt32(dr["LeaveID"]);
+                    leaveList.Add(leave);
                  }
              }
             return leaveList;
@@ -50,10 +51,10 @@ namespace AttendenceManagementSystem.DataAccess
         {           
             SqlCommand cmd = new SqlCommand("sp_InsertLeave", connection);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@startDate", leave.startDate);
-            cmd.Parameters.AddWithValue("@endDate", leave.endDate);
-            cmd.Parameters.AddWithValue("@count", leave.count);
-            cmd.Parameters.AddWithValue("@reason", leave.reason);
+            cmd.Parameters.AddWithValue("@startDate", leave.StartDate);
+            cmd.Parameters.AddWithValue("@endDate", leave.EndDate);
+            cmd.Parameters.AddWithValue("@count", leave.Count);
+            cmd.Parameters.AddWithValue("@reason", leave.Reason);
             cmd.Parameters.AddWithValue("@EmpID", leave.EmpID);
             connection.Open();
             int row = cmd.ExecuteNonQuery();
@@ -82,11 +83,11 @@ namespace AttendenceManagementSystem.DataAccess
                         employee.ManagerID = Convert.ToInt32(dr["managerID"]);
                         Leave leave = new Leave();
                         leave.LeaveID = Convert.ToInt32(dr["LeaveID"]);
-                        leave.startDate = Convert.ToDateTime(dr["startDate"]);
-                        leave.endDate = Convert.ToDateTime(dr["endDate"]);
-                        leave.reason = Convert.ToString(dr["reason"]);
-                        leave.status = Convert.ToString(dr["status"]);
-                        leave.count = Convert.ToInt32(dr["count"] == DBNull.Value ? "0" : dr["count"]);
+                        leave.StartDate = Convert.ToDateTime(dr["StartDate"]);
+                        leave.EndDate = Convert.ToDateTime(dr["EndDate"]);
+                        leave.Reason = Convert.ToString(dr["Reason"]);
+                        leave.Status = Convert.ToString(dr["Status"]);
+                        leave.Count = Convert.ToInt32(dr["Count"] == DBNull.Value ? "0" : dr["Count"]);
                         List<Leave> leaveList = new List<Leave>();
                         leaveList.Add(leave);
                         employee.Listofleave = leaveList;
@@ -124,5 +125,41 @@ namespace AttendenceManagementSystem.DataAccess
             connection.Close();
             return id;
         }
+        public int DeleteLeave(int leaveId)
+        {
+            connection.Open();
+            SqlCommand cmd = new SqlCommand("sp_deleteLeave", connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", leaveId);
+            int row = cmd.ExecuteNonQuery();
+            connection.Close();
+            return row;
+        }
+        public List<string> GetHolidayList()
+        {
+            List<string> holidays = new List<string>();
+
+            connection.Open();
+
+            SqlCommand command = new SqlCommand("select holiday from HolidayList", connection);
+
+            using (SqlDataReader reader = command.ExecuteReader())
+
+
+            {
+                while (reader.Read())
+                {
+                    holidays.Add(Convert.ToString(reader["Holiday"]));
+                   
+                }
+            }
+
+            connection.Close();
+            return holidays;
+
+            
+        }
     }
-}
+
+    }
+

@@ -22,14 +22,14 @@
                     <div class="table">
                         <div class="row">
                             <div class="col-md-4 text-left">Username</div>
-                            <div class="col-md-4 pull-left"><input name="Username" type="text" value="" /></div>
+                            <div class="col-md-4 pull-left"><input name="Username" type="text" value="" required/></div>
                         </div>
                         <div>
                             &nbsp;
                         </div>
                         <div class="row">
                             <div class="col-md-4 text-left">Password</div>
-                            <div class="col-md-4 pull-left"><input name="Password" type="password" value="" /></div>
+                            <div class="col-md-4 pull-left"><input name="Password" type="password" value="" required/></div>
                         </div>
                         <div>
                             &nbsp;
@@ -43,10 +43,17 @@
                     </div>
                 </form>
             </div>
+            @if (ViewBag.IsSuccess ==0)
+            {
+                <div>
+                    <label class="text-danger">Invalid user</label>
 
-            <div class="panel-footer">
-                <h6>Copyright</h6>
-            </div>
+                </div>
+            }
+        </div>
+        
+        <div class="panel-footer">
+            <h6>Copyright</h6>
         </div>
 
     </div>

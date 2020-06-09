@@ -28,9 +28,6 @@
                         int managerId = Model.FirstOrDefault().ManagerID;
 
                     }
-
-
-
                     @foreach (var item in Model)
                     {
 
@@ -39,24 +36,24 @@
                             <tr>
                                 <td>@Html.DisplayFor(model => item.Name)</td>
 
-                                <td> @Html.DisplayFor(m => item.Listofleave[i].startDate)</td>
+                                <td> @Html.DisplayFor(m => item.Listofleave[i].StartDate)</td>
                                 <td>
-                                    @Html.DisplayFor(m => item.Listofleave[i].endDate)
+                                    @Html.DisplayFor(m => item.Listofleave[i].EndDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(m => item.Listofleave[i].reason)
+                                    @Html.DisplayFor(m => item.Listofleave[i].Reason)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(m => item.Listofleave[i].count)
+                                    @Html.DisplayFor(m => item.Listofleave[i].Count)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(m => item.Listofleave[i].status)
+                                    @Html.DisplayFor(m => item.Listofleave[i].Status)
                                 </td>
-                                @if (item.Listofleave[i].status == "applied")
+                                @if (item.Listofleave[i].Status == "applied")
                                 {
 
                                     <td>
-                                        @Html.ActionLink("Approve", "Approve", new { leaveId = item.Listofleave[i].LeaveID, empid = item.ManagerID })
+                                        @Html.ActionLink("Approve", "Approve", new { leaveId = item.Listofleave[i].LeaveID})
                                     </td>
                                 }
                                 else
@@ -68,7 +65,7 @@
                         }
 
                     }
-                    @Html.ActionLink("back", "Index", new { id = @managerId })
+                    @Html.ActionLink("back", "Index")
                 </table>
             </div>
         </div>

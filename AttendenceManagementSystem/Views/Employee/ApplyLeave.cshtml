@@ -2,29 +2,33 @@
 @{
     ViewBag.Title = "calender";
 }
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using (Html.BeginForm())
 {
     <div class="panel panel-info">
         <div class="panel-heading">
             <h2>Apply Leave</h2>
+            <div> @Html.ActionLink("back", "Index", "Employee")</div>
+           
         </div>
         <div class="panel-body">
+
             <div class="table">
+
                 <div class="row">
                     <div class="col-md-4 text-left">Start Date</div>
-                    <div class="col-md-4 pull-left"><input name="startDate" type="date" min="2019-09-03" /></div>
+                    <div class="col-md-4 pull-left"><input id="startDate" name="startDate" type="date" /></div>
                 </div>
                 <div>
                     &nbsp;
                 </div>
                 <div class="row">
                     <div class="col-md-4 text-left">End Date</div>
-                    <div class="col-md-4 pull-left"><input name="endDate" type="date" min="2019-09-03" /></div>
+                    <div class="col-md-4 pull-left"><input id="endDate" name="endDate" type="date" /></div>
                 </div>
                 <div>
                     &nbsp;
-                </div>               
+                </div>
                 <div class="row">
                     <div class="col-md-4 text-left">Reason</div>
                     <div class="col-md-4 pull-left">
@@ -33,7 +37,7 @@
                     </div>
                 </div>
                 @Html.HiddenFor(mod => mod.EmpID)
-                @Html.HiddenFor(mod => mod.status)
+                @Html.HiddenFor(mod => mod.Status)
             </div>
             <div>
                 &nbsp;
@@ -41,9 +45,50 @@
             <div>
                 <button type="submit" class="btn btn-success pull-right">Apply</button>
             </div>
+            @if (ViewBag.IsSuccess == false)
+            {
+                <div>
+                    <label class="text-danger">Leave has been applied earlier for the specified date range</label>
+
+                </div>
+            }
+            @if (ViewBag.holidays == 1)
+            {
+                <div>
+                    <label class="text-danger">These days are holidays</label>
+
+                </div>
+            }
+            @if (ViewBag.errorEntry == 1)
+            {
+                <div>
+                    <label class="text-danger">Invalid entry.</label>
+
+                </div>
+            }
+
         </div>
+      
         <div class="panel-footer">
             <h6>Copyright</h6>
         </div>
     </div>
 }
+<script>
+    var mydate = new Date();
+    var day = mydate.getDate();
+    var month = ("0" + (mydate.getMonth() + 1)).slice(-2);
+    var year = mydate.getFullYear();
+    var minDate = year + '-' + month + '-' + day;
+    var myDatePicker = document.getElementById('startDate');
+    myDatePicker.setAttribute('min', minDate);
+</script>
+<script>
+    var mydate = new Date();
+    var day = mydate.getDate();
+    var month = ("0" + (mydate.getMonth() + 1)).slice(-2);
+    var year = mydate.getFullYear();
+    var minDate = year + '-' + month + '-' + day;
+    var myDatePicker = document.getElementById('endDate');
+    myDatePicker.setAttribute('min', minDate);
+</script>

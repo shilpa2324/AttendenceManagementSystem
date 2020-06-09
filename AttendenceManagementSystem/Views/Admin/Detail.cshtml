@@ -30,14 +30,14 @@
                     @foreach (var item in Model)
                     {
                     <tr>
-                        <td>@Html.DisplayFor(model => item.startDate)</td>
-                        <td>@Html.DisplayFor(model => item.endDate)</td>
-                        <td>@Html.DisplayFor(model => item.reason)</td>
-                        <td>@Html.DisplayFor(model => item.count)</td>
-                        <td>@Html.DisplayFor(model => item.status)</td>
+                        <td>@Html.DisplayFor(model => item.StartDate)</td>
+                        <td>@Html.DisplayFor(model => item.EndDate)</td>
+                        <td>@Html.DisplayFor(model => item.Reason)</td>
+                        <td>@Html.DisplayFor(model => item.Count)</td>
+                        <td>@Html.DisplayFor(model => item.Status)</td>
                     </tr>
                     }
-                    @Html.ActionLink("back", "Display")
+                    @Html.ActionLink("Back", "Display")
 
                 </table>
             </div>

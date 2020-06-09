@@ -24,7 +24,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Login">Logout</a></li>
+                    @if (ViewBag.login == 1)
+                    {
+                        <li><a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
+                    }
+
+
+
                 </ul>
             </div>
         </div>
@@ -61,7 +67,12 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+    <layout type="log4net.Layout.PatternLayout">
+        <conversionpattern value="%level  %message  %date">
+        </conversionpattern>
+    </layout>
     @RenderSection("Scripts", required: false)
+
+
 </body>
 </html>

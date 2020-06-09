@@ -10,6 +10,11 @@ namespace AttendenceManagementSystem.Controllers
         
         EmployeeService employeeService = new EmployeeService();
         LeaveService leaveService = new LeaveService();
+
+        /// <summary>
+        /// Display the details of all the employees
+        /// </summary>
+        /// <returns>It returns the employee list</returns>
         public IActionResult Display()
         {
             try
@@ -25,7 +30,10 @@ namespace AttendenceManagementSystem.Controllers
                 return RedirectToAction("Error", "ErrorHandling", errorView);
             }            
         }
-
+        /// <summary>
+        /// Add a new Employee to the application
+        /// </summary>
+        /// <returns>It display the Employee details with the new data</returns>
         [HttpGet]
         public IActionResult Create()
         {
@@ -52,7 +60,11 @@ namespace AttendenceManagementSystem.Controllers
                 return RedirectToAction("Error", "ErrorHandling", errorView);
             }
         }
-
+        /// <summary>
+        /// To edit the employee details
+        /// </summary>
+        /// <param name="id">Employee id</param>
+        /// <returns>It display the Employee details with the edited data</returns>
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -67,17 +79,16 @@ namespace AttendenceManagementSystem.Controllers
                 errorView.Message = "Error Occured while accessing Employee by Id";
                 errorView.Reason = e.Message;
                 return RedirectToAction("Error", "ErrorHandling", errorView);
-            }
-           
+            }           
         }
         [HttpPost]
         public IActionResult Edit(int id,Employee emp)
         {
             try
-            {
+            {               
                 emp.EmpID = id;
                 employeeService.EditEmployee(emp);
-                return RedirectToAction("Display");
+                return RedirectToAction("Display");                    
             }
             catch(Exception e)
             {
@@ -85,9 +96,13 @@ namespace AttendenceManagementSystem.Controllers
                 errorView.Message = "Error Occured while Editing Employee details";
                 errorView.Reason = e.Message;
                 return RedirectToAction("Error", "ErrorHandling", errorView);
-            }
-           
+            }          
         }
+        /// <summary>
+        /// To delete an employee from the application
+        /// </summary>
+        /// <param name="id">Employee id</param>
+        /// <returns>It display the Employee details without the deleted data</returns>
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -123,6 +138,11 @@ namespace AttendenceManagementSystem.Controllers
             }
            
         }
+        /// <summary>
+        /// Leave details of a perticular employee
+        /// </summary>
+        /// <param name="id">Employee id</param>
+        /// <returns>Leave list</returns>
         public IActionResult Detail(int id)
         {
             try

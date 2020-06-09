@@ -4,7 +4,17 @@ using System.Collections.Generic;
 
 namespace AttendenceManagementSystem.Service
 {
-    public class EmployeeService
+    public interface IEmployeeService
+    {
+        int AddEmployee(Employee emp);
+        Employee GetEmployeeById(int employeeId);
+        int EditEmployee(Employee emp);
+        List<Employee> DisplayEmployeeDetails();
+        int DeleteEmployee(Employee emp);
+        Employee ValidateEmployee(LoginDetails loginDetails);
+
+    }
+    public class EmployeeService : IEmployeeService
     {
         EmployeeDA employeeDA = new EmployeeDA();
         public int AddEmployee(Employee emp)
@@ -33,5 +43,4 @@ namespace AttendenceManagementSystem.Service
             return emp;
         }
     }
-
 }

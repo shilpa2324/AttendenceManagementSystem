@@ -9,7 +9,7 @@ namespace AttendenceManagementSystem.DataAccess
     public class EmployeeDA
     {
         SqlConnection connection = null;
-        readonly string connString = "Data Source=NEUDESI-BP74JHF\\SQLEXPRESS;Initial Catalog=attendanceManagement; Integrated Security=SSPI;";
+        readonly string connString = "Data Source=SKOLIYOTTU01\\SQLEXPRESS;Initial Catalog=attendanceManagement; Integrated Security=SSPI;";
         public EmployeeDA()
         {
             connection = new SqlConnection(connString);
@@ -20,7 +20,7 @@ namespace AttendenceManagementSystem.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EmpName", emp.Name);
             cmd.Parameters.AddWithValue("@MailID", emp.MailID);
-            cmd.Parameters.AddWithValue("@EmpType", emp.category);
+            cmd.Parameters.AddWithValue("@EmpType", emp.Category);
             cmd.Parameters.AddWithValue("@UserName", emp.Username);
             cmd.Parameters.AddWithValue("@Password", emp.Password);
 
@@ -31,26 +31,26 @@ namespace AttendenceManagementSystem.DataAccess
         }
         public Employee GetEmployeeByID(int id)
         {
-            Employee emp = new Employee();           
-            connection.Open();
-            SqlCommand cmd = new SqlCommand("sp_getEmployee", connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            cmd.Parameters.AddWithValue("@id", id);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            connection.Close();
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow dr in dt.Rows)
+                Employee emp = new Employee();
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("sp_getEmployee", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cmd.Parameters.AddWithValue("@id", id);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                connection.Close();
+                if (dt.Rows.Count > 0)
                 {
-                    emp = new Employee();
-                    emp.EmpID = Convert.ToInt32(dr["EmpID"]);
-                    emp.Name = Convert.ToString(dr["EmpName"]);
-                    emp.MailID = Convert.ToString(dr["MailID"]);
-                    emp.category = Convert.ToString(dr["EmpType"]);
-                    emp.leaves_taken = Convert.ToInt32(dr["leaveCount"] == DBNull.Value ? "0" : dr["leaveCount"]);
-                }
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        emp = new Employee();
+                        emp.EmpID = Convert.ToInt32(dr["EmpID"]);
+                        emp.Name = Convert.ToString(dr["EmpName"]);
+                        emp.MailID = Convert.ToString(dr["MailID"]);
+                        emp.Category = Convert.ToString(dr["EmpType"]);
+                        emp.Leaves_taken = Convert.ToInt32(dr["LeaveCount"] == DBNull.Value ? "0" : dr["LeaveCount"]);
+                    }
             }
             return emp;
         }
@@ -61,7 +61,7 @@ namespace AttendenceManagementSystem.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EmpName", emp.Name);
             cmd.Parameters.AddWithValue("@MailID", emp.MailID);
-            cmd.Parameters.AddWithValue("@EmpType", emp.category);
+            cmd.Parameters.AddWithValue("@EmpType", emp.Category);
             cmd.Parameters.AddWithValue("@id", emp.EmpID);
             int row = cmd.ExecuteNonQuery();
             connection.Close();
@@ -77,6 +77,7 @@ namespace AttendenceManagementSystem.DataAccess
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataTable dt = new DataTable();
             da.Fill(dt);
+            
             connection.Close();
 
             if (dt.Rows.Count > 0)
@@ -87,8 +88,8 @@ namespace AttendenceManagementSystem.DataAccess
                     emp.EmpID = Convert.ToInt32(dr["EmpId"]);
                     emp.Name = Convert.ToString(dr["EmpName"]);
                     emp.MailID = Convert.ToString(dr["MailID"]);
-                    emp.category = Convert.ToString(dr["EmpType"]);
-                    emp.leaves_taken = Convert.ToInt32(dr["leaveCount"] == DBNull.Value ? "0" : dr["leaveCount"]);
+                    emp.Category = Convert.ToString(dr["EmpType"]);
+                    emp.Leaves_taken = Convert.ToInt32(dr["LeaveCount"] == DBNull.Value ? "0" : dr["LeaveCount"]);
                     employees.Add(emp);
                 }
             }
@@ -124,7 +125,7 @@ namespace AttendenceManagementSystem.DataAccess
                     emp.EmpID = Convert.ToInt32(dr["EmpID"]);
                     emp.Name = Convert.ToString(dr["EmpName"]);
                     emp.MailID = Convert.ToString(dr["MailID"]);
-                    emp.category = Convert.ToString(dr["EmpType"]);
+                    emp.Category = Convert.ToString(dr["EmpType"]);
                 }
             }
             return emp;
