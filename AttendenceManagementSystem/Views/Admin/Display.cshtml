@@ -1,0 +1,71 @@
+﻿
+@model IEnumerable<AttendenceManagementSystem.Models.Employee>
+
+@{
+    ViewData["Title"] = "Display";
+}
+@using (Html.BeginForm())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3>Employee details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+
+                <table class="table table-responsive">
+                    <tr class="bg-primary text-white">
+                        <th>
+                            <h5>Name</h5>
+                        </th>
+                        <th>
+                            <h5>Category</h5>
+                        </th>
+                        <th>
+                            <h5>Mail Id</h5>
+                        </th>
+                        <th>
+                            <h5>Leaves Taken</h5>
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(model => item.Name)</td>
+                            <td>@Html.DisplayFor(model => item.category)</td>
+                            <td>@Html.DisplayFor(model => item.MailID)</td>
+                            <td>@Html.DisplayFor(model => item.leaves_taken)</td>
+
+                            <td>
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.EmpID }) |
+
+                                @Html.ActionLink("Delete", "Delete", new { id = item.EmpID })|
+
+                                @Html.ActionLink("Detail", "Detail", new { id = item.EmpID })
+
+                            </td>
+                        </tr>
+                    }
+                    @Html.ActionLink("Create", "Create")
+
+                </table>
+            </div>
+        </div>
+            <div class="panel-footer">
+                <h6>Copyright</h6>
+            </div>
+       
+        </div>
+        }
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+﻿@model LoginDetails
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using (Html.BeginForm())
+{
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2>Login</h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div>
+                    &nbsp;
+                </div>
+
+                <form asp-action="Login" asp-controller="Home">
+                    <div asp-validation-summary="All" class="text-danger ">
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                    <div class="table">
+                        <div class="row">
+                            <div class="col-md-4 text-left">Username</div>
+                            <div class="col-md-4 pull-left"><input name="Username" type="text" value="" /></div>
+                        </div>
+                        <div>
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 text-left">Password</div>
+                            <div class="col-md-4 pull-left"><input name="Password" type="password" value="" /></div>
+                        </div>
+                        <div>
+                            &nbsp;
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="submit" class="btn btn-success ">Login</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel-footer">
+                <h6>Copyright</h6>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <body>
+        <h2>Login</h2>
+        <div class="form-group">
+            <form asp-action="Login" asp-controller="Home">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <h5>Username:<input asp-for="@Model.Username" value="" type="text" /><br /></h5>
+
+                <h5>Password:<input asp-for="@Model.Password" value="" type="password" /><br /></h5>
+                <input type="submit" value="Login" class="btn btn-info" />
+            </form>
+        </div>
+    </body>
+    </html>*@

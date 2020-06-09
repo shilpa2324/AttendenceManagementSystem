@@ -1,0 +1,37 @@
+﻿
+@model AttendenceManagementSystem.Models.Employee
+@{
+    ViewData["Title"] = "Index";
+}
+@using (Html.BeginForm())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2>Welcome @Html.DisplayFor(model => model.Name)</h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div>
+                    <h3>Total leaves taken:@Html.DisplayFor(model => model.leaves_taken)</h3>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+                @if (Model.leaves_taken != 0)
+                {
+                    <div>@Html.ActionLink("View Leave History", "LeaveHistory", new { id = Model.EmpID })</div>
+                }
+                <div>@Html.ActionLink("Apply Leave", "ApplyLeave", new { id = Model.EmpID })</div>
+                @if (Model.category == "manager")
+                {
+                    <div>@Html.ActionLink("Approve Leave", "ApproveLeave", new { id = Model.EmpID })</div>
+                }
+
+                
+            </div>
+        </div>
+        <div class="panel-footer">
+            <h6>Copyright</h6>
+        </div>
+    </div>
+}

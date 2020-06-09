@@ -1,0 +1,57 @@
+﻿
+@model IEnumerable<AttendenceManagementSystem.Models.Leave>
+
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2>leave history</h2>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <table class="table table-responsive">
+                <tr class="bg-primary text-white">
+                    <th>
+                        <h5>Start Date</h5>
+                    </th>
+                    <th>
+                        <h5>End Date</h5>
+                    </th>
+                    <th>
+                        <h5>Reason</h5>
+                    </th>
+                    <th>
+                        <h5>Count</h5>
+                    </th>
+                    <th>
+                        <h5>Status</h5>
+                    </th>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@Html.DisplayFor(model => item.startDate)</td>
+                        <td>@Html.DisplayFor(model => item.endDate)</td>
+                        <td>@Html.DisplayFor(model => item.reason)</td>
+                        <td>@Html.DisplayFor(model => item.count)</td>
+                        <td>@Html.DisplayFor(model => item.status)</td>
+                    </tr>
+                    }
+                    @Html.ActionLink("back", "Display")
+
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <h6>Copyright</h6>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+

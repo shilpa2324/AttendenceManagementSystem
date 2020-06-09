@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AttendenceManagementSystem.Models.Employee>
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2>List of leaves to approve!</h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <table class="table table-responsive">
+                    <tr class="bg-primary text-white">
+                        <th><h5>name</h5></th>
+                        <th><h5>Start Date</h5></th>
+                        <th><h5>End Date</h5></th>
+                        <th><h5>reason</h5></th>
+                        <th><h5>count</h5></th>
+                        <th><h5>status</h5></th>
+                        <th><h5>Action</h5></th>
+                    </tr>
+
+                    @{
+
+                        int managerId = Model.FirstOrDefault().ManagerID;
+
+                    }
+
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        @for (var i = 0; i < item.Listofleave.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(model => item.Name)</td>
+
+                                <td> @Html.DisplayFor(m => item.Listofleave[i].startDate)</td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Listofleave[i].endDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Listofleave[i].reason)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Listofleave[i].count)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Listofleave[i].status)
+                                </td>
+                                @if (item.Listofleave[i].status == "applied")
+                                {
+
+                                    <td>
+                                        @Html.ActionLink("Approve", "Approve", new { leaveId = item.Listofleave[i].LeaveID, empid = item.ManagerID })
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            </tr>
+
+                        }
+
+                    }
+                    @Html.ActionLink("back", "Index", new { id = @managerId })
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <h6>Copyright</h6>
+        </div>
+        </div>
+        }
+
+
+
+
+
+
+
+

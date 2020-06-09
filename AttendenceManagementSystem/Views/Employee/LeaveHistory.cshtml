@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AttendenceManagementSystem.Models.Employee>
+
+@{
+    ViewData["Title"] = "Leave History";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2>Leave History</h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-responsive">
+                <tr class="bg-primary text-white">
+
+                    <th><h5>Start Date</h5></th>
+                    <th><h5>End Date</h5></th>
+                    <th><h5>Reason</h5></th>
+                    <th><h5>Count</h5></th>
+                    <th><h5>Status</h5></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    @for (var i = 0; i < item.Listofleave.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(model => item.EmpID)
+
+
+                            <td> @Html.DisplayFor(m => item.Listofleave[i].startDate)</td>
+                            <td>
+                                @Html.DisplayFor(m => item.Listofleave[i].endDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Listofleave[i].reason)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Listofleave[i].count)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Listofleave[i].status)
+                            </td>
+                        </tr>
+                    }
+                    @Html.ActionLink("back", "Index", "Employee", new { id = item.EmpID })
+                }
+
+            </table>
+
+        </div>
+        <div class="panel-footer">
+            <h6>Copyright</h6>
+        </div>
+    </div>
+}
+
+
+
+
+
+

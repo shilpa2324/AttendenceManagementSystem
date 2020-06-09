@@ -1,0 +1,49 @@
+﻿@model AttendenceManagementSystem.Models.Leave
+@{
+    ViewBag.Title = "calender";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h2>Apply Leave</h2>
+        </div>
+        <div class="panel-body">
+            <div class="table">
+                <div class="row">
+                    <div class="col-md-4 text-left">Start Date</div>
+                    <div class="col-md-4 pull-left"><input name="startDate" type="date" min="2019-09-03" /></div>
+                </div>
+                <div>
+                    &nbsp;
+                </div>
+                <div class="row">
+                    <div class="col-md-4 text-left">End Date</div>
+                    <div class="col-md-4 pull-left"><input name="endDate" type="date" min="2019-09-03" /></div>
+                </div>
+                <div>
+                    &nbsp;
+                </div>               
+                <div class="row">
+                    <div class="col-md-4 text-left">Reason</div>
+                    <div class="col-md-4 pull-left">
+                        <textarea rows="4" cols="50" name="reason"></textarea>
+
+                    </div>
+                </div>
+                @Html.HiddenFor(mod => mod.EmpID)
+                @Html.HiddenFor(mod => mod.status)
+            </div>
+            <div>
+                &nbsp;
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success pull-right">Apply</button>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <h6>Copyright</h6>
+        </div>
+    </div>
+}
